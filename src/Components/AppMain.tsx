@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import dayjsUtc from 'dayjs/plugin/utc';
 import dayjsTimezone from 'dayjs/plugin/timezone';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
@@ -7,6 +8,7 @@ import { Navigration } from './Nav';
 import { LazyRoutes } from './routeHook';
 import { featureRouteDefinitions } from './AppFeatures';
 
+dayjs.extend(dayjsUtc);
 dayjs.extend(dayjsTimezone);
 dayjs.tz.setDefault('America/Montreal');
 

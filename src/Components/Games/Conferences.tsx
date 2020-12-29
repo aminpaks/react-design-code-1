@@ -1,5 +1,5 @@
 export default function Conferences() {
-  console.log('render Conferences');
+  console.log('Render Games/Conferences');
   return (
     <div>
       <h1>Conferences</h1>
