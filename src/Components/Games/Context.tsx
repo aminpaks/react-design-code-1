@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
 import { createContext, FC, useCallback, useContext, useState } from 'react';
+import { createContext as createSimpleContext } from '../CreateContext';
 
 export interface DateState {
   startDate: string;
@@ -12,8 +13,10 @@ export type StateContextType = [DateState, UpdateStatePartially];
 
 const initialContextValue: StateContextType = [{} as DateState, () => {}];
 
+/**
+ * Old fashioned low-level React context creation
+ */
 const SalesContext = createContext(initialContextValue);
-const ConferencesContext = createContext(initialContextValue);
 
 const todayDate = dayjs().startOf('day');
 const initialDateState: DateState = {
@@ -40,6 +43,12 @@ export const useSaleState = () => {
   return useContext(SalesContext);
 };
 
-export const useConferencesState = () => {
-  return useContext(ConferencesContext);
-};
+/**
+ * Simplified usage of creating a context
+ */
+const { Provider: ConferencesStateProvider, useContext: useConferencesState } = createSimpleContext(
+  'ConferencesState',
+  initialDateState
+);
+
+export { ConferencesStateProvider, useConferencesState };
