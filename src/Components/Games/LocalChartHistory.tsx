@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { useQuery } from 'react-query';
 
 import { tryCatch } from '../../Utils';
@@ -9,11 +9,19 @@ import { DateState, UpdateStatePartially } from './Context';
 
 export const LocalChartHistory: FC<
   {
+    cacheId?: string;
     updateState: UpdateStatePartially;
   } & DateState
-> = ({ startDate, endDate, apiStartDate = startDate, apiEndDate = endDate, updateState }) => {
+> = ({
+  cacheId = 'simpleCache',
+  startDate,
+  endDate,
+  apiStartDate = startDate,
+  apiEndDate = endDate,
+  updateState,
+}) => {
   const { data, isLoading } = useQuery(
-    ['sales', apiStartDate, apiEndDate],
+    [cacheId, apiStartDate, apiEndDate],
     async (): Promise<IData> => {
       const d = await getSales(apiStartDate, apiEndDate);
       const oldData = tryCatch(() => data, { items: [], currency: '' } as IData);
@@ -26,7 +34,6 @@ export const LocalChartHistory: FC<
             (acc, item) => {
               const { id: newItemId } = item;
               if (!acc.find(({ id }) => id === newItemId)) {
-                console.log('new item', item);
                 acc.push(item);
               }
               return acc;
@@ -44,6 +51,13 @@ export const LocalChartHistory: FC<
     }
   );
 
+  const { dataX, dataY } = useMemo(() => {
+    const dataX = data?.items.map(({ date }) => date) ?? [];
+    const dataY = data?.items.map(({ cash }) => Number.parseInt(cash, 10)) ?? [];
+
+    return { dataX, dataY };
+  }, [data]);
+
   return (
     <div>
       {isLoading && <div>Loading...</div>}
@@ -51,12 +65,7 @@ export const LocalChartHistory: FC<
         <div>Start date: {dayjs(startDate).toString()}</div>
         <div>End date: {dayjs(endDate).toString()}</div>
       </div>
-      <HistoryChart
-        startDate={startDate}
-        endDate={endDate}
-        x={data?.items.map(({ date }) => date) ?? []}
-        y={data?.items.map(({ cash }) => Number(cash)) ?? []}
-      />
+      <HistoryChart x={dataX} y={dataY} />
 
       <button
         onClick={() => {

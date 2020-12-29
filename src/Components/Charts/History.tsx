@@ -1,43 +1,16 @@
 import dayjs from 'dayjs';
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import Plot from 'react-plotly.js';
-import { DateRange } from '../../types';
 
-export const HistoryChart: FC<
-  DateRange & {
-    x: string[];
-    y: number[];
-  }
-> = ({ startDate, endDate, x, y }) => {
-  // useEffect(() => {
-  //   console.log(items);
-  //   const chartDiv = document.getElementById('chart');
-  //   if (items?.length > 0) {
-  //     console.log(items);
-  //     Plotly.newPlot(
-  //       chartDiv,
-  //       [
-  //         {
-  //           x: items.map((v: any) => v.date),
-  //           y: items.map((v: any) => v.cash),
-  //           type: 'scatter',
-  //           mode: 'markers',
-  //         },
-  //       ],
-  //       {
-  //         // title: "A Fancy Plot",
-  //         height: '100%',
-  //         xaxis: {
-  //           type: 'date',
-  //           range: [startDate, endDate],
-  //         },
-  //       },
-  //       {
-  //         responsive: true,
-  //       },
-  //     );
-  //   }
-  // }, [startDate, endDate, items]);
+export const HistoryChart: FC<{
+  x: string[];
+  y: number[];
+}> = ({ x, y }) => {
+  const xAxisRange = useMemo(() => {
+    const first = x[0];
+    const last = x[x.length - 1];
+    return [dayjs(first).add(-1, 'month').toISOString(), dayjs(last).add(1, 'month').toISOString()];
+  }, [x]);
 
   return (
     <div>
@@ -58,10 +31,7 @@ export const HistoryChart: FC<
           title: 'A Fancy Plot',
           xaxis: {
             type: 'date',
-            range: [
-              dayjs(startDate).add(-1, 'month').toISOString(),
-              dayjs(endDate).add(1, 'month').toISOString(),
-            ],
+            range: xAxisRange,
           },
         }}
       />
