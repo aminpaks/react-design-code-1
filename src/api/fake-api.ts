@@ -1,6 +1,6 @@
 import { IData, mockSales } from './mock-data';
 
-function filterFakeResponse(startDate: Date, endDate: Date): IData {
+function filterFakeResponse(startDate: string, endDate: string): IData {
   const result = {
     ...mockSales,
     items: mockSales.items.filter((item) => {
@@ -21,6 +21,6 @@ function delay(milliseconds = 1000) {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
 }
 
-export const getSales = (startDate: Date, endDate: Date) => {
+export const getSales = (startDate: string, endDate: string) => {
   return delay().then(() => filterFakeResponse(startDate, endDate));
 };

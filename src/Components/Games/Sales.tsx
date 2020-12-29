@@ -1,12 +1,18 @@
-// import SalesChartHistory from './sales-chart-history.component';
+import { FC } from 'react';
+import { useSaleState } from './Context';
+import { LocalChartHistory } from './LocalChartHistory';
 
-export default function Sales() {
-  console.log('render Sales');
+const Sales: FC = () => {
+  const [state, updateState] = useSaleState();
+  const { startDate, endDate } = state;
+  console.log('Render Games/Sales', startDate, endDate);
   return (
     <div>
       <h1>Sales</h1>
       <hr />
-      {/* <SalesChartHistory /> */}
+      <LocalChartHistory {...state} updateState={updateState} />
     </div>
   );
-}
+};
+
+export default Sales;

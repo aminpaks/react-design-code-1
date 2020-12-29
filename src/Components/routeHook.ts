@@ -6,7 +6,8 @@ export type RouteDefinitions = RouteDefinition[];
 
 export const LazyRoutes: FC<{
   routes: RouteDefinitions;
-}> = ({ routes }) => {
+  prefixPath?: string;
+}> = ({ routes, prefixPath = '' }) => {
   return createElement(
     Suspense,
     { fallback: createElement('div', null, 'Loading...') },
@@ -14,7 +15,7 @@ export const LazyRoutes: FC<{
       Switch,
       null,
       routes.map(([path, Component]) =>
-        createElement(Route, { key: path, path, component: Component }, null)
+        createElement(Route, { key: path, path: prefixPath + path, component: Component }, null)
       )
     )
   );

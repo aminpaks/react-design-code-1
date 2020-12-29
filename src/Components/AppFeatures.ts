@@ -1,7 +1,7 @@
-import { ComponentType, lazy } from 'react';
+import { lazy } from 'react';
+import { RouteDefinitions } from './routeHook';
 
-const routesCollection: Record<string, ComponentType<unknown>> = {
+export const featureRouteDefinitions: RouteDefinitions = Object.entries({
   '/games': lazy(() => import('./Games')),
   '/books': lazy(() => import('./Books')),
-};
-export const featureRouteDefinitions = Object.entries(routesCollection);
+});

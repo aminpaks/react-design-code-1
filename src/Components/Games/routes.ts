@@ -1,10 +1,9 @@
-import { lazy, ComponentType } from 'react';
+import { lazy } from 'react';
 import { RouteDefinitions } from '../routeHook';
 
-const routeCollection: Record<string, ComponentType> = {
+const routeDefinitions: RouteDefinitions = Object.entries({
   '/sales': lazy(() => import('./Sales')),
   '/conferences': lazy(() => import('./Conferences')),
-};
-const routeDefinitions: RouteDefinitions = Object.entries(routeCollection);
+});
 
 export default routeDefinitions;
