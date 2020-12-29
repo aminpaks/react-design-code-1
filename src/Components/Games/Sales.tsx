@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useSaleState } from './Context';
-import { LocalChartHistory } from './LocalChartHistory';
+import { LocalHistoryChart } from './LocalHistoryChart';
 
 const Sales: FC = () => {
   const [state, updateState] = useSaleState();
@@ -10,7 +10,7 @@ const Sales: FC = () => {
     <div>
       <h1>Sales</h1>
       <hr />
-      <LocalChartHistory {...state} updateState={updateState} />
+      <LocalHistoryChart {...state} updateState={updateState} />
     </div>
   );
 };

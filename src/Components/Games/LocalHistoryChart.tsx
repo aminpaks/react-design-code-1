@@ -6,8 +6,9 @@ import { tryCatch } from '../../Utils';
 import { HistoryChart } from '../Charts';
 import { getSales, IData } from '../../api';
 import { DateState, UpdateStatePartially } from './Context';
+import { mergeFakeApiResponses } from '../../api/utils';
 
-export const LocalChartHistory: FC<
+export const LocalHistoryChart: FC<
   {
     cacheId?: string;
     updateState: UpdateStatePartially;
@@ -22,27 +23,10 @@ export const LocalChartHistory: FC<
 }) => {
   const { data, isLoading } = useQuery(
     [cacheId, apiStartDate, apiEndDate],
-    async (): Promise<IData> => {
-      const d = await getSales(apiStartDate, apiEndDate);
-      const oldData = tryCatch(() => data, { items: [], currency: '' } as IData);
-
-      return {
-        ...oldData,
-        ...d,
-        items: d.items
-          .reduce(
-            (acc, item) => {
-              const { id: newItemId } = item;
-              if (!acc.find(({ id }) => id === newItemId)) {
-                acc.push(item);
-              }
-              return acc;
-            },
-            [...oldData.items]
-          )
-          .sort(({ date: x }, { date: y }) => String(x).localeCompare(String(y))),
-      };
-    },
+    (): Promise<IData> =>
+      getSales(apiStartDate, apiEndDate).then(
+        mergeFakeApiResponses(tryCatch(() => data, { items: [], currency: '' } as IData))
+      ),
     {
       retry: false,
       refetchOnMount: false,
