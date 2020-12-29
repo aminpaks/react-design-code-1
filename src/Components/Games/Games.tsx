@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { LazyRoutes } from '../routeHook';
+import { LazyRoutes } from '../LazyRoutes';
 import routeDefinitions from './routes';
 import { SalesStateProvider } from './Context';
 
@@ -24,7 +24,15 @@ export function Games() {
         <hr />
 
         <SalesStateProvider>
-          <LazyRoutes prefixPath={gamesRoute} routes={routeDefinitions} />
+          <LazyRoutes
+            prefixPath={gamesRoute}
+            routes={routeDefinitions}
+            fallback={
+              <div>
+                Loading <b>Games</b> modules...
+              </div>
+            }
+          />
         </SalesStateProvider>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import { lazy } from 'react';
-import { RouteDefinitions } from './routeHook';
+import { RouteDefinitions } from '../types';
 
 export const featureRouteDefinitions: RouteDefinitions = Object.entries({
   '/games': lazy(() => import('./Games')),

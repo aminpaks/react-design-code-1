@@ -1,5 +1,5 @@
 import { lazy } from 'react';
-import { RouteDefinitions } from '../routeHook';
+import { RouteDefinitions } from '../../types';
 
 const routeDefinitions: RouteDefinitions = Object.entries({
   '/sales': lazy(() => import('./Sales')),

@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Home } from './Home';
 import { Navigration } from './Nav';
-import { LazyRoutes } from './routeHook';
+import { LazyRoutes } from './LazyRoutes';
 import { featureRouteDefinitions } from './AppFeatures';
 
 dayjs.extend(dayjsUtc);
