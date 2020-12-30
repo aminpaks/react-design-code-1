@@ -1,0 +1,25 @@
+.simple-loading-spinner {
+  top: 40%;
+  left: 50%;
+  opacity: 0;
+  padding: 2rem;
+  display: block;
+  visibility: hidden;
+  border: 1px solid #888;
+  border-radius: 5px;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  color: #444;
+  background-color: #fff;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  z-index: 99;
+
+  transition: 200ms ease-in-out, 0ms 200ms visibility;
+}
+.simple-loading-spinner.visible {
+  top: 50%;
+  opacity: 1;
+  visibility: visible;
+  transition: 200ms ease-in-out, 300ms cubic-bezier(0.08, 0.18, 0.35, 0.98) top,
+    200ms 0ms visibility;
+}

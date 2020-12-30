@@ -8,7 +8,7 @@ const gamesRoute = '/games';
 export function Games() {
   console.log('Render Games');
   return (
-    <div>
+    <div className="position--relative">
       <h1>Games</h1>
       <hr />
       <div>
@@ -25,15 +25,7 @@ export function Games() {
 
         <ConferencesStateProvider>
           <SalesStateProvider>
-            <LazyRoutes
-              prefixPath={gamesRoute}
-              routes={routeDefinitions}
-              fallback={
-                <div>
-                  Loading <b>Games</b> modules...
-                </div>
-              }
-            />
+            <LazyRoutes prefixPath={gamesRoute} routes={routeDefinitions} />
           </SalesStateProvider>
         </ConferencesStateProvider>
       </div>

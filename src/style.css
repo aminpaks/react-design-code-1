@@ -1,3 +1,11 @@
 h1, p {
   font-family: Lato;
 }
+
+.position--relative {
+  position: relative;
+}
+
+.display--table {
+  display: table;
+}

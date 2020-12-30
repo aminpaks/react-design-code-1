@@ -46,9 +46,9 @@ export const useSaleState = () => {
 /**
  * Simplified usage of creating a context
  */
-const { Provider: ConferencesStateProvider, useContext: useConferencesState } = createSimpleContext(
-  'ConferencesState',
-  initialDateState
-);
+const {
+  Provider: ConferencesStateProvider,
+  useContext: useConferencesState,
+} = createSimpleContext('ConferencesState', { ...initialDateState, isChecked: false });
 
 export { ConferencesStateProvider, useConferencesState };

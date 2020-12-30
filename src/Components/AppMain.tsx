@@ -18,7 +18,7 @@ export function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Router>
-        <div>
+        <div className="position--relative">
           <Navigration />
 
           <hr />

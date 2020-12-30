@@ -1,8 +1,9 @@
 import { FC, ReactNode, Suspense } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { RouteDefinitions } from '../types';
+import { Placeholder } from './Placeholder';
 
-const defaultFallbackSpinner = <div>Loading...</div>;
+const defaultFallbackSpinner = <Placeholder />;
 
 export const LazyRoutes: FC<{
   routes: RouteDefinitions;

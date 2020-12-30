@@ -1,0 +1,86 @@
+.placeholder {
+  width: 600px;
+  display: table;
+
+  padding: 2em 1em;
+
+  background-color: rgba(0, 0, 0, 0.08);
+}
+.placeholder hr {
+  margin: 2em 0;
+}
+.placeholder--title {
+  display: block;
+}
+.placeholder--item {
+  width: 100%;
+  height: 1em;
+  display: block;
+  position: relative;
+  overflow: hidden;
+  
+  background: rgba(255,255,255,0.5);
+}
+.placeholder--item:not(:last-of-type) {
+  margin: 1.2em 0;
+}
+.placeholder--title .placeholder--item {
+  width: 80%;
+  height: 2em;
+}
+.placeholder--item::before,
+.placeholder--item::after {
+  left: 0;
+  top: -2em;
+  display: block;
+  content: "";
+  width: 4em;
+  height: 6em;
+  position: absolute;
+  transform: rotate(45deg);
+  animation-name: placeholderMovement1;
+  animation-duration: 1500ms;
+  animation-iteration-count: infinite;
+  background-image: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 30%, rgba(255,255,255,1) 70%, rgba(255,255,255,0) 100%);
+}
+.placeholder--item::after {
+  animation-name: placeholderMovement2;
+  animation-duration: 1500ms;
+}
+.placeholder--item.item1::after {
+  animation-delay: 50ms;
+}
+.placeholder--item.item2::after {
+  animation-delay: 150ms;
+}
+.placeholder--item.item3::after {
+  animation-delay: 200ms;
+}
+.placeholder--item.item4::after {
+  animation-delay: 250ms;
+}
+@keyframes placeholderMovement1 {
+  0% {
+    left: -20%;
+  }
+  60% {
+    left: 110%;
+  }
+  100% {
+    left: 110%;
+  }
+}
+@keyframes placeholderMovement2 {
+  0% {
+    left: -20%;
+  }
+  20% {
+    left: 10%;
+  }
+  90% {
+    left: 60%;
+  }
+  100% {
+    left: 110%;
+  }
+}

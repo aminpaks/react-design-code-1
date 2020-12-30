@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useSaleState } from './Context';
-import { LocalHistoryChart } from './LocalHistoryChart';
+import { LocalHistoryChart } from './GamesHistoryChart';
 
 const Sales: FC = () => {
   const [state, updateState] = useSaleState();

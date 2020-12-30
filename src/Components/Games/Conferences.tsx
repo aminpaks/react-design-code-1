@@ -1,3 +1,4 @@
+import { Loading } from '../Loading';
 import { useConferencesState } from './Context';
 
 export default function Conferences() {
@@ -6,6 +7,7 @@ export default function Conferences() {
   return (
     <div>
       <h1>Conferences</h1>
+      <Loading visible={state.isChecked} />
       <hr />
       <div>
         <div style={{ cursor: 'default' }}>
@@ -37,6 +39,19 @@ export default function Conferences() {
           >
             Set Check
           </button>
+        </div>
+
+        <div>
+          <span>Loading state</span>
+          <input
+            type="checkbox"
+            checked={state.isChecked}
+            onChange={({ target }) =>
+              updateState((s) => {
+                s.isChecked = target.checked;
+              })
+            }
+          />
         </div>
       </div>
     </div>
