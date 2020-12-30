@@ -17,5 +17,6 @@ function delay(milliseconds = 1000) {
 }
 
 export const getSales = (startDate: string, endDate: string) => {
+  console.log('API fetching...');
   return delay().then(() => filterFakeResponse(startDate, endDate));
 };

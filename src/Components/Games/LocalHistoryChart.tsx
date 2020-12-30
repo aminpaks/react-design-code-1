@@ -21,7 +21,7 @@ export const LocalHistoryChart: FC<
   apiEndDate = endDate,
   updateState,
 }) => {
-  const { data, isLoading } = useQuery(
+  const { data, isFetching } = useQuery(
     [cacheId, apiStartDate, apiEndDate],
     (): Promise<IData> =>
       getSales(apiStartDate, apiEndDate).then(
@@ -44,10 +44,10 @@ export const LocalHistoryChart: FC<
 
   return (
     <div>
-      {isLoading && <div>Loading...</div>}
+      {isFetching && <div>Loading...</div>}
       <div>
-        <div>Start date: {dayjs(startDate).toString()}</div>
-        <div>End date: {dayjs(endDate).toString()}</div>
+        <div>Start date: {dayjs(startDate).format('MMMM DD, YYYY')}</div>
+        <div>End date: {dayjs(endDate).format('MMMM DD, YYYY ')}</div>
       </div>
       <HistoryChart x={dataX} y={dataY} />
 
